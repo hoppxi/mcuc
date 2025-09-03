@@ -9,8 +9,8 @@ Reproducible builds using [Nix flakes](https://nixos.org/manual/nix/unstable/com
 ### As a Node.js/npm project
 
 ```sh
-git clone https://github.com/hoppxi/mcu-cli.git
-cd mcu-cli
+git clone https://github.com/hoppxi/mcuc.git
+cd mcuc
 npm install
 npm run build
 
@@ -22,7 +22,7 @@ npm run build
 ```sh
 nix build
 # or
-nix run github:hoppxi/mcu-cli
+nix run github:hoppxi/mcuc
 ```
 
 The resulting binary will be in `./result/bin/mcuc`.
@@ -109,7 +109,7 @@ You can add mcuc as an input in another flake:
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    mcuc.url = "github:hoppxi/mcu-cli";
+    mcuc.url = "github:hoppxi/mcuc";
   };
 
   outputs = { self, nixpkgs, mcuc, ... }:
