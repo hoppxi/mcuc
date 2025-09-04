@@ -7,7 +7,7 @@ const program = new Command();
 
 program
   .name("update-version")
-  .description("Update version in package.json, default.nix, and bin/mcuc.ts")
+  .description("Update version in package.json and default.nix")
   .argument("<version>", "New version to set")
   .action(async (version) => {
     const rootDir = process.cwd();
@@ -25,14 +25,6 @@ program
         file: path.join(rootDir, "default.nix"),
         update: (content) =>
           content.replace(/version\s*=\s*".*?"/, `version = "${version}"`),
-      },
-      {
-        file: path.join(rootDir, "src/bin/mcuc.ts"),
-        update: (content) =>
-          content.replace(
-            /\.version\(["'`].*?["'`]\)/,
-            `.version("${version}")`
-          ),
       },
     ];
 

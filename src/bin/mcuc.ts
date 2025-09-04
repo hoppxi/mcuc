@@ -5,6 +5,7 @@ import { generate } from "../cmd/generate";
 import { info } from "../cmd/info";
 import { contrast } from "../cmd/contrast";
 import { preview } from "../cmd/preview";
+import pkg from "../../package.json";
 
 const program = new Command();
 
@@ -13,7 +14,7 @@ program
   .description(
     "Material Color Utilities CLI - Generate and inspect Material 3 color themes"
   )
-  .version("1.1.0")
+  .version(pkg.version)
   .showHelpAfterError()
   .enablePositionalOptions();
 
