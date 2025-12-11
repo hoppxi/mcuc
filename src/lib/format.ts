@@ -7,7 +7,7 @@ export class Format {
     theme: Theme | { light?: ThemeColor; dark?: ThemeColor },
     fmt: string,
     prefix: string,
-    casing: string
+    casing: string,
   ): string {
     const processedTheme = this._transformThemeKeys(theme, prefix, casing);
 
@@ -26,13 +26,13 @@ export class Format {
         return `export const theme = ${JSON.stringify(
           processedTheme,
           null,
-          2
+          2,
         )};`;
       case "js":
         return `const theme = ${JSON.stringify(
           processedTheme,
           null,
-          2
+          2,
         )};\nexport { theme }`;
       case "xml":
         return this._formatXml(processedTheme);
@@ -47,7 +47,7 @@ export class Format {
 
   static info(
     info: { hex: string; hct: { hue: number; chroma: number; tone: number } },
-    fmt: string
+    fmt: string,
   ): string {
     switch (fmt) {
       case "json":
@@ -67,7 +67,7 @@ export class Format {
       | { ratio: number; colorA: string; colorB: string; wcag: any }
       | { ratio: number; colorA: string; colorB: string; wcag: any }[],
     fmt: string,
-    wcagOnly = false
+    wcagOnly = false,
   ): string {
     const toDisplay = (d: any) =>
       wcagOnly
@@ -108,7 +108,7 @@ export class Format {
 
   static async preview(
     theme: { light?: ThemeColor; dark?: ThemeColor },
-    usage: boolean
+    usage: boolean,
   ): Promise<string> {
     const lightTheme = theme.light!;
     const darkTheme = theme.dark!;
@@ -120,7 +120,7 @@ export class Format {
             `<div class="color-card">
             <div class="color-swatch" style="background-color: ${value};"></div>
             <div class="color-label">${label} - ${key}: ${value}</div>
-          </div>`
+          </div>`,
         )
         .join("\n");
     }
@@ -159,7 +159,7 @@ export class Format {
   private static _transformThemeKeys(
     theme: any,
     prefix: string,
-    casing: string
+    casing: string,
   ): any {
     const out: any = {};
     for (const scheme in theme) {
@@ -174,34 +174,46 @@ export class Format {
 
   private static _formatScss(theme: any): string {
     let out = "";
+
     for (const scheme in theme) {
+      out += `@mixin ${scheme}-theme() {\n`;
       const colors = theme[scheme];
       for (const key in colors) {
-        out += `$${key}: ${colors[key]};\n`;
+        out += `  $${key}: ${colors[key]};\n`;
       }
+      out += `}\n\n`;
     }
+
     return out.trim();
   }
 
   private static _formatLess(theme: any): string {
     let out = "";
+
     for (const scheme in theme) {
+      out += `.${scheme}-theme() {\n`;
       const colors = theme[scheme];
       for (const key in colors) {
-        out += `@${key}: ${colors[key]};\n`;
+        out += `  @${key}: ${colors[key]};\n`;
       }
+      out += `}\n\n`;
     }
+
     return out.trim();
   }
 
   private static _formatStyl(theme: any): string {
     let out = "";
+
     for (const scheme in theme) {
+      out += `${scheme}-theme()\n`;
       const colors = theme[scheme];
       for (const key in colors) {
-        out += `${key} = ${colors[key]}\n`;
+        out += `  ${key} = ${colors[key]}\n`;
       }
+      out += `\n`;
     }
+
     return out.trim();
   }
 
