@@ -1,11 +1,11 @@
 import path from "path";
 import { promises as fs } from "fs";
-import { Logger } from "../lib/logger";
-import { Utils } from "../lib/utils";
-import { MaterialCli } from "../lib/material-cli";
-import { OutputFormatter } from "../lib/format";
-import { Theme, ThemeColor } from "../types/mcuc";
-import { GenerateOptions, GenerateInput } from "../types/commands";
+import { Logger } from "@/lib/logger";
+import { Utils } from "@/lib/utils";
+import { MaterialCli } from "@/lib/material-cli";
+import { Format } from "@/lib/format";
+import { Theme, ThemeColor } from "@/types/mcuc";
+import { GenerateOptions, GenerateInput } from "@/types/commands";
 
 export async function generate(input: GenerateInput, opts: GenerateOptions) {
   const logger = new Logger(true);
@@ -50,7 +50,7 @@ export async function generate(input: GenerateInput, opts: GenerateOptions) {
       process.exit(1);
     }
 
-    const formatted = OutputFormatter.format(
+    const formatted = Format.generate(
       result as Theme | { light?: ThemeColor; dark?: ThemeColor },
       opts.format,
       opts.prefix,

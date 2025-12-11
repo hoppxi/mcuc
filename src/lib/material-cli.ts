@@ -6,9 +6,9 @@ import {
   Theme,
   Hct,
 } from "@material/material-color-utilities";
-import { Contrast } from "./contrast";
-import { Theme as Themed, ThemeColor } from "../types/mcuc";
-import { Utils } from "./utils";
+import { Contrast } from "@/lib/contrast";
+import { Theme as Themed, ThemeColor } from "@/types/mcuc";
+import { Utils } from "@/lib/utils";
 
 export class MaterialCli {
   static async generatePalette(

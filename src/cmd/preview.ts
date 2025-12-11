@@ -1,10 +1,10 @@
-import { promises as fs } from "fs";
 import path from "path";
-import { MaterialCli } from "../lib/material-cli";
-import { OutputFormatter } from "../lib/format";
-import { Logger } from "../lib/logger";
-import { ThemeColor } from "../types/mcuc";
-import { PreviewOptions, PreviewInput } from "../types/commands";
+import { promises as fs } from "fs";
+import { MaterialCli } from "@/lib/material-cli";
+import { Format } from "@/lib/format";
+import { Logger } from "@/lib/logger";
+import { ThemeColor } from "@/types/mcuc";
+import { PreviewOptions, PreviewInput } from "@/types/commands";
 
 export async function preview(input: PreviewInput, opts: PreviewOptions) {
   const logger = new Logger(true);
@@ -27,7 +27,7 @@ export async function preview(input: PreviewInput, opts: PreviewOptions) {
       theme: "both",
     });
 
-    const html = await OutputFormatter.formatPreview(
+    const html = await Format.preview(
       themeObj as { light?: ThemeColor; dark?: ThemeColor },
       opts.usage
     );

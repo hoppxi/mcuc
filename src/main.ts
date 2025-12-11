@@ -1,11 +1,9 @@
-#!/usr/bin/env node
-
 import { Command } from "commander";
-import { generate } from "../cmd/generate";
-import { info } from "../cmd/info";
-import { contrast } from "../cmd/contrast";
-import { preview } from "../cmd/preview";
-import pkg from "../../package.json";
+import { generate } from "@/cmd/generate";
+import { info } from "@/cmd/info";
+import { contrast } from "@/cmd/contrast";
+import { preview } from "@/cmd/preview";
+import pkg from "$/package.json";
 
 const program = new Command();
 

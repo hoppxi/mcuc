@@ -1,9 +1,9 @@
 import * as yaml from "js-yaml";
-import { Theme, ThemeColor } from "../types/mcuc";
-import { Utils } from "./utils";
+import { Theme, ThemeColor } from "@/types/mcuc";
+import { Utils } from "@/lib/utils";
 
-export class OutputFormatter {
-  static format(
+export class Format {
+  static generate(
     theme: Theme | { light?: ThemeColor; dark?: ThemeColor },
     fmt: string,
     prefix: string,
@@ -45,7 +45,7 @@ export class OutputFormatter {
     }
   }
 
-  static formatInfo(
+  static info(
     info: { hex: string; hct: { hue: number; chroma: number; tone: number } },
     fmt: string
   ): string {
@@ -62,7 +62,7 @@ export class OutputFormatter {
     }
   }
 
-  static formatContrast(
+  static contrast(
     data:
       | { ratio: number; colorA: string; colorB: string; wcag: any }
       | { ratio: number; colorA: string; colorB: string; wcag: any }[],
@@ -106,7 +106,7 @@ export class OutputFormatter {
     }
   }
 
-  static async formatPreview(
+  static async preview(
     theme: { light?: ThemeColor; dark?: ThemeColor },
     usage: boolean
   ): Promise<string> {

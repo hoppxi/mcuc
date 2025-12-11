@@ -1,10 +1,10 @@
-import { promises as fs } from "fs";
 import path from "path";
-import { Logger } from "../lib/logger";
-import { Utils } from "../lib/utils";
-import { MaterialCli } from "../lib/material-cli";
-import { OutputFormatter } from "../lib/format";
-import { InfoOptions, InfoInput } from "../types/commands";
+import { promises as fs } from "fs";
+import { Logger } from "@/lib/logger";
+import { Utils } from "@/lib/utils";
+import { MaterialCli } from "@/lib/material-cli";
+import { Format } from "@/lib/format";
+import { InfoOptions, InfoInput } from "@/types/commands";
 
 export async function info(input: InfoInput, opts: InfoOptions) {
   const logger = new Logger(true);
@@ -28,7 +28,7 @@ export async function info(input: InfoInput, opts: InfoOptions) {
       distance: opts.distance,
     });
 
-    const formatted = OutputFormatter.formatInfo(info, opts.format);
+    const formatted = Format.info(info, opts.format);
     logger.success("Color info output:");
     console.log(formatted);
   } catch (err: any) {

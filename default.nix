@@ -1,5 +1,6 @@
 {
   pkgs ? import <nixpkgs> { },
+  lib,
 }:
 
 pkgs.buildNpmPackage {
@@ -8,7 +9,7 @@ pkgs.buildNpmPackage {
 
   src = ./.;
 
-  npmDepsHash = "sha256-DOSl6WulsXz9Yg6y46N2RvjGpyUoA6wQBIG/9n/yn78=";
+  npmDepsHash = lib.fakeHash;
 
   npmBuild = "run build";
 

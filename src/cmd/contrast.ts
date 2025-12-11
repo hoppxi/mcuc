@@ -1,7 +1,7 @@
-import { MaterialCli } from "../lib/material-cli";
-import { OutputFormatter } from "../lib/format";
-import { Logger } from "../lib/logger";
-import { ContrastOptions, ContrastInput } from "../types/commands";
+import { MaterialCli } from "@/lib/material-cli";
+import { Format } from "@/lib/format";
+import { Logger } from "@/lib/logger";
+import { ContrastOptions, ContrastInput } from "@/types/commands";
 
 export async function contrast(inputs: ContrastInput, opts: ContrastOptions) {
   const logger = new Logger(true);
@@ -14,11 +14,7 @@ export async function contrast(inputs: ContrastInput, opts: ContrastOptions) {
         MaterialCli.contrastRatio(fg, bg)
       );
 
-      const formatted = OutputFormatter.formatContrast(
-        results,
-        opts.format,
-        opts.wcagOnly
-      );
+      const formatted = Format.contrast(results, opts.format, opts.wcagOnly);
       logger.success("Contrast against backgrounds:");
       console.log(formatted);
       return;
@@ -30,11 +26,7 @@ export async function contrast(inputs: ContrastInput, opts: ContrastOptions) {
     }
 
     const result = MaterialCli.contrastRatio(inputs[0], inputs[1]);
-    const formatted = OutputFormatter.formatContrast(
-      result,
-      opts.format,
-      opts.wcagOnly
-    );
+    const formatted = Format.contrast(result, opts.format, opts.wcagOnly);
     logger.success("Contrast output:");
     console.log(formatted);
   } catch (err: any) {
